@@ -6,12 +6,12 @@ public class Main {
         MyCollection collection = new MyCollection();
         MyCollection collection1 = new MyCollection();
         Object[] people = new Object[3];
-        Object ivanov = new Object("Ivan","Ivanov");
-        Object petrov = new Object("Petr", "Petrov");
+        Object ivanov = new Object();
+        Object petrov = new Object();
         people[0]= petrov;
-        Object snow = new Object("John", "Snow");
+        Object snow = new Object();
         people[1] = snow;
-        Object sparrow = new Object("Jack", "Sparrow");
+        Object sparrow = new Object();
         people[2]= sparrow;
         collection.add(ivanov);
         collection.print();
