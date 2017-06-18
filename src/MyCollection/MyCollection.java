@@ -1,23 +1,28 @@
 package MyCollection;
+import java.util.Collection;
+import java.util.Iterator;
 
-import java.util.Arrays;
-
-public class MyCollection {
+public class MyCollection implements Collection {
     private Object[] array;
     private int size;
     public  MyCollection(){
         this.size = 0;
         array = new Object[size];
     }
-    public  void  add(Object object){
-            Object[] newArray = new Object[size+1];
-            System.arraycopy(array,0,newArray,0,size);
-            newArray[size++]= object;
-            array = newArray;
+    public  boolean add(Object object){
+        boolean added;
+        Object[] newArray = new Object[size+1];
+        System.arraycopy(array,0,newArray,0,size);
+        newArray[size++]= object;
+        array = newArray;
+        added = true;
+        return  added;
         }
     public void print(){
         if(size>0){
-            System.out.println(Arrays.asList(array));
+            for (int i = 0; i < size ; i++) {
+                System.out.println(array[i].toString());
+            }
         } else {
             System.out.println("Collection is empty!");
         }
@@ -36,23 +41,120 @@ public class MyCollection {
         return false;
     }
     public boolean contains(Object object){
+        boolean contained = false;
         for (int i = 0; i <size ; i++) {
             if(object.equals(array[i])){
-                return true;
+                contained = true;
             }
         }
-        return  false;
+        return  contained;
     }
-    public void remove(Object object){
+
+    @Override
+    public Iterator iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return array;
+    }
+
+    @Override
+    public Object[] toArray(Object[] a) {
+        if(a.length >= array.length){
+            System.arraycopy(array, 0, a, 0, size);
+        }else {
+            Object[] new_a = new Object[array.length];
+            System.arraycopy(array, 0,new_a, 0, size);
+            a = new_a;
+        }
+        return a;
+    }
+
+    public boolean remove(Object object){
+        boolean removed = false;
         for (int i = 0; i <size ; i++) {
            if(object.equals(array[i])){
                for (int j = i; j < size -1 ; j++) {
                    array[j] = array[j+1];
+                   removed = true;
                }
                size--;
            }
         }
+        return  removed;
     }
+
+    @Override
+    public boolean addAll(Collection c) {
+        boolean added = false;
+        if(c instanceof  Object){
+                for (Object o:c) {
+                    this.add(o);
+                    added = true;
+                }
+            }
+        return  added;
+
+    }
+
+    @Override
+    public boolean retainAll(Collection c) {
+        boolean retained = false;
+        if(c instanceof Object){
+            int counter = 0;
+            Object[] newArray = new Object[counter];
+            for (Object o:c) {
+                for(int i =0; i<this.size; i++ ){
+                    if (o.equals(array[i])){
+                        counter++;
+                        newArray[counter-1] = array[i];
+                        retained = true;
+
+                    }
+                }
+            }
+            array = newArray;
+        }
+
+        return retained;
+    }
+
+    @Override
+    public boolean removeAll(Collection c) {
+        Object[] newArray;
+        for (int i = 0; i < size ; i++) {
+                if(c.contains(array[i])){
+                    for (int j = i; j < size -1 ; j++) {
+                        array[j] = array[j+1];
+                    }
+                    array[--size] = null;
+                }
+        }
+        newArray = new Object[size];
+        System.arraycopy(array,0,newArray,0,size);
+        array = newArray;
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection c) {
+        int count = 0;
+        for (int i = 0; i < this.size; i++) {
+            if (c.contains(array[i])) {
+
+                count++;
+            }
+        }
+
+        if (count >= c.size()) {
+            return true;
+        }
+        return false;
+    }
+
+
     public Object getValueByIndex(int index){
         Object result = null;
         if(index>=0 && index<size){
@@ -66,10 +168,11 @@ public class MyCollection {
         }
         return result ;
     }
-    public void addAll(MyCollection newCollection){
+    public boolean addAll(MyCollection newCollection){
         for (int i = 0; i < newCollection.size() ; i++) {
             this.add(newCollection.getValueByIndex(i));
         }
+        return  true;
 
     }
     public void clear(){
@@ -78,36 +181,6 @@ public class MyCollection {
         }
         this.size = 0;
     }
-    public void removeAll(MyCollection collection){
-        int size1 = collection.size();
-        Object[] newArray;
-        for (int i = 0; i < size ; i++) {
-            for (int j = 0; j < size1 ; j++) {
-               if(array[i].equals(collection.getValueByIndex(j))){
-                   for (int k = i; k < size -1 ; k++) {
-                       array[k] = array[k+1];
-                   }
-                   array[--size] = null;
-                }
-            }
-        }
-        newArray = new Object[size];
-        System.arraycopy(array,0,newArray,0,size);
-        array = newArray;
-    }
-    public boolean containsAll(MyCollection collection) {
-        int count = 0;
-        for (int i = 0; i < this.size; i++) {
-            if (collection.contains(array[i])) {
 
-                count++;
-            }
-        }
-
-        if (count >= collection.size()) {
-            return true;
-        }
-        return false;
-    }
 
 }

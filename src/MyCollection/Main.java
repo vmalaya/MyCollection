@@ -6,12 +6,12 @@ public class Main {
         MyCollection collection = new MyCollection();
         MyCollection collection1 = new MyCollection();
         Object[] people = new Object[3];
-        Object ivanov = new Object();
-        Object petrov = new Object();
+        String ivanov ="Ivanov";
+        String petrov = "Petrov";
         people[0]= petrov;
-        Object snow = new Object();
-        people[1] = snow;
-        Object sparrow = new Object();
+        Integer number = 54;
+        people[1] = number;
+        String sparrow = "Sparrow";
         people[2]= sparrow;
         collection.add(ivanov);
         collection.print();
@@ -35,7 +35,7 @@ public class Main {
 
         System.out.println("------REMOVE ALL TEST");
         collection.add(ivanov);
-        collection.add(snow);
+        collection.add(number);
         collection.add(sparrow);
         collection.add(petrov);
         collection.removeAll(collection1);
@@ -45,6 +45,10 @@ public class Main {
         collection.add(ivanov);
         collection.add(petrov);
         System.out.println(collection.containsAll(collection1));
+
+
+
+
 
 
 
