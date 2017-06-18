@@ -9,6 +9,7 @@ public class MyCollection implements Collection {
         this.size = 0;
         array = new Object[size];
     }
+    @Override
     public  boolean add(Object object){
         boolean added;
         Object[] newArray = new Object[size+1];
@@ -27,6 +28,7 @@ public class MyCollection implements Collection {
             System.out.println("Collection is empty!");
         }
     }
+    @Override
     public int size(){
         int count = 0 ;
         for (int i = 0; i <size ; i++) {
@@ -34,12 +36,14 @@ public class MyCollection implements Collection {
         }
         return count;
     }
+    @Override
     public  boolean isEmpty(){
         if(this.size == 0){
             return true;
         }
         return false;
     }
+    @Override
     public boolean contains(Object object){
         boolean contained = false;
         for (int i = 0; i <size ; i++) {
@@ -72,6 +76,7 @@ public class MyCollection implements Collection {
         return a;
     }
 
+    @Override
     public boolean remove(Object object){
         boolean removed = false;
         for (int i = 0; i <size ; i++) {
@@ -168,13 +173,7 @@ public class MyCollection implements Collection {
         }
         return result ;
     }
-    public boolean addAll(MyCollection newCollection){
-        for (int i = 0; i < newCollection.size() ; i++) {
-            this.add(newCollection.getValueByIndex(i));
-        }
-        return  true;
-
-    }
+    @Override
     public void clear(){
         for (int i = 0; i < array.length ; i++) {
                 array[i]= null;
