@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class MyCollection implements Collection {
+
     private Object[] array;
     private int size;
     public  MyCollection(){
@@ -56,7 +57,7 @@ public class MyCollection implements Collection {
 
     @Override
     public Iterator iterator() {
-        return null;
+        return new MyIterator(this);
     }
 
     @Override

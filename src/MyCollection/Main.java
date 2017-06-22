@@ -1,6 +1,8 @@
 package MyCollection;
 
 
+import java.util.Iterator;
+
 public class Main {
     public static void main(String[] args) {
         MyCollection collection = new MyCollection();
@@ -45,6 +47,7 @@ public class Main {
         collection.add(ivanov);
         collection.add(petrov);
         System.out.println(collection.containsAll(collection1));
+        
 
 
 
